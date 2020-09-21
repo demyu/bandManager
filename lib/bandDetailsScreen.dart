@@ -21,6 +21,7 @@ class BandDetailsScreenState extends State<BandDetailsScreen> {
   List<Members> members;
   List<Members> loadedMembers;
 
+  var instrumentpicture;
   var picture;
 
   void load() async {
@@ -100,6 +101,27 @@ class BandDetailsScreenState extends State<BandDetailsScreen> {
     }
   }
 
+  ExactAssetImage getInstrumentPicture(String instrument){
+    switch (instrument) {
+     case 'Gt':
+      instrumentpicture = ExactAssetImage('assets/instruments/gt.png');
+      break;
+      case 'Dr':
+        instrumentpicture = ExactAssetImage('assets/instruments/dr.jpg');
+      break;
+      case 'Vo':
+        instrumentpicture = ExactAssetImage('assets/instruments/vc.jpg');
+      break;
+      case 'Key':
+        instrumentpicture = ExactAssetImage('assets/instruments/kb.jpg');
+      break;
+      case 'Ba':
+        instrumentpicture = ExactAssetImage('assets/instruments/bs.jpg');
+      break;
+    }
+    return instrumentpicture;
+  }
+
   @override
   Widget build(BuildContext context) {
     getPicture();
@@ -131,6 +153,11 @@ class BandDetailsScreenState extends State<BandDetailsScreen> {
                     return Container(
                       width: MediaQuery.of(context).size.width,
                       height: 50,
+                      decoration: new BoxDecoration(
+                        image: new DecorationImage(
+                          image: getInstrumentPicture(loadedMembers[index].getInstrument()),
+                          fit: BoxFit.fitHeight,
+                        ),),
                       color: Colors.red[300],
                       child: Row(
                         children: [
